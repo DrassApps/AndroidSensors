@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Sensors</string>
+    <string name="dev_name" translatable="false">Andrés Micó Millán</string>
+
+    <!-- COMMON -->
+    <string name="hint_nombre">Buscar</string>
+
+    <!--Sensores-->
+    <string name="acl">Aceleróemtro</string>
+    <string name="ambTemp">Temperatura ambiente</string>
+    <string name="gravity">Gravedad</string>
+    <string name="gyroscope">Giroscopio</string>
+    <string name="light">Luz</string>
+    <string name="li_acl">Aceleración lineal</string>
+    <string name="magnetic">Campo magnético</string>
+    <string name="ori">Orientación</string>
+    <string name="preasure">Presión</string>
+    <string name="proximity">Proximidad</string>
+    <string name="relat_hum">Humedad relativa</string>
+    <string name="rotation_v">Rotación vectorial</string>
+    <string name="temperature">Temperatura</string>
+
+
+</resources>
