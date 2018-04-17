@@ -16,6 +16,13 @@
             android:layout_centerInParent="true"
             android:textSize="45dp"/>
 
+        <ImageView
+            android:id="@+id/infoArrow"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
         <TextView
             android:id="@+id/nameSensor"
             android:layout_width="wrap_content"
@@ -25,33 +32,41 @@
             android:layout_marginTop="53dp"
             android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/infoSensorX"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="169dp"
-            android:layout_marginStart="90dp"
-            android:textSize="25dp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/infoSensorY"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/infoSensorX"
-            android:layout_centerHorizontal="true"
-            android:textSize="25dp" />
+            <TextView
+                android:id="@+id/infoSensorX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:textSize="20dp"
+                android:lines="1" />
 
-        <TextView
-            android:id="@+id/infoSensorZ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="163dp"
-            android:layout_marginEnd="91dp"
-            android:textSize="25dp" />
+            <TextView
+                android:id="@+id/infoSensorY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="1"
+                android:layout_marginStart="10dp"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/infoSensorZ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="1"
+                android:layout_marginStart="10dp"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

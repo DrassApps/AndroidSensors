@@ -6,6 +6,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +21,16 @@ public class DeatilSensorView extends Activity implements SensorEventListener {
     private Sensor sensor;
     private RelativeLayout main;
     private TextView infoSensor, nameSensor, infoX, infoY, infoZ;
+    private ImageView infoArrow;
+
+    private float[] lastAccelerometerValue = new float[3];
+    private float[] lastMagnetometerVale = new float[3];
+    private boolean isAccelerometer = false;
+    private boolean isMagnetometer = false;
+
+    private float[] rotationValues = new float[9];
+    private float[] orientation = new float[3];
+    private float currentDegrees = 0f;
 
     // MARK - LIFCE CYCLE
     @Override
@@ -54,6 +67,7 @@ public class DeatilSensorView extends Activity implements SensorEventListener {
         infoX = (TextView) findViewById(R.id.infoSensorX);
         infoY = (TextView) findViewById(R.id.infoSensorY);
         infoZ = (TextView) findViewById(R.id.infoSensorZ);
+        infoArrow = (ImageView) findViewById(R.id.infoArrow);
     }
 
     @Override
@@ -93,10 +107,65 @@ public class DeatilSensorView extends Activity implements SensorEventListener {
             }
         }
 
-        //
+        // Show values of three axis
         else if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             nameSensor.setText(getResources().getString(R.string.acl));
+            infoX.setText("Axis X " + String.valueOf(firtValue));
+            infoY.setText("Axis Y " + String.valueOf(secondValue));
+            infoZ.setText("Axis Z " + String.valueOf(thirdValue));
+        }
 
+        // Show device orientation with an arrow
+        else if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+            // Setup new sensor for retrieve device orientation
+            Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            sensorManager.registerListener(this,accelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+
+            nameSensor.setText(getResources().getString(R.string.magnetic));
+            infoArrow.setBackground(getResources().getDrawable(R.drawable.magnetic_arrow));
+
+            // If sensor is set up retrieve accelerometer values
+            if (event.sensor == accelerometer) {
+                System.arraycopy(event.values, 0, lastAccelerometerValue, 0, event.values.length);
+                isAccelerometer = true;
+            }
+
+            // If sensor is set up retrieve magnetic field values
+            else if (event.sensor == sensor) {
+                System.arraycopy(event.values, 0, lastMagnetometerVale, 0, event.values.length);
+                isMagnetometer = true;
+            }
+
+            if (isAccelerometer && isMagnetometer) {
+
+                SensorManager.getRotationMatrix(rotationValues, null, lastAccelerometerValue, lastMagnetometerVale);
+                SensorManager.getOrientation(rotationValues, orientation);
+
+                float azimuthInRadians = orientation[0];
+                float azimuthInDegress = (float)(Math.toDegrees(azimuthInRadians)+360)%360;
+
+                // Rotate arrow
+                RotateAnimation rotateAnimation = new RotateAnimation(
+                        currentDegrees,
+                        -azimuthInDegress,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f);
+
+                rotateAnimation.setDuration(250);
+                rotateAnimation.setFillAfter(true);
+
+                infoArrow.startAnimation(rotateAnimation);
+
+                // Update degrees for animation
+                currentDegrees = -azimuthInDegress;
+
+                // Show orientation info
+                infoX.setText("Axis X " + String.valueOf(orientation[0]));
+                infoY.setText("Axis Y " + String.valueOf(orientation[1]));
+                infoZ.setText("Axis Z " + String.valueOf(orientation[2]));
+            }
         }
     }
 

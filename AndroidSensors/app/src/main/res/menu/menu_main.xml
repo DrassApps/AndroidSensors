@@ -6,7 +6,7 @@
 
     <item android:id="@+id/SearchSensor"
         android:title=""
-        android:icon="@drawable/camera"
+        android:icon="@drawable/ic_magnify_white_36dp"
         android:orderInCategory="10"
         app:showAsAction="always" />
 

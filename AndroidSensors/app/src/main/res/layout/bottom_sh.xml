@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--(Vista del bottom sheet que nos permite de una manera mas visual ver algunos datos sobre
-los contactos, permite ser ocultada y debe de ser definidad como un Widget.BottomSheetBehaviour para
-su correcto funcionamietno -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -13,37 +10,31 @@ su correcto funcionamietno -->
     android:layout_width="match_parent"
     android:layout_height="180dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!--Imagen del fav -->
-        <TextView
+        <ImageView
             android:id="@+id/btsheet_hideButton"
-            android:layout_weight="5"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="eh"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_chevron_down_black_48dp"
             />
 
-        <!--Imagen del fav -->
-        <TextView
+        <ImageView
             android:id="@+id/btsheet_nextAct"
-            android:layout_weight="1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="eh"
+            android:src="@drawable/ic_arrow_right_thick_black_48dp"
             />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
